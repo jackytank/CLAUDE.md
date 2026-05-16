@@ -23,7 +23,7 @@ jobs:
 
           # Optional inputs with defaults
           model_id: 'deepseek/deepseek-v4-flash:free' # Default model
-          max_tokens: '2048' # Default max tokens
+          max_tokens: '8192' # Default max tokens
           review_label: 'ai-review' # Optional: Only review PRs with this label
 
           # Optional custom prompt

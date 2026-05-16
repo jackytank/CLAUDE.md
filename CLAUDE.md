@@ -8,8 +8,24 @@
   limited to) a tip, a small note, a deep insight, an expert opinion, a dark side of the industry,
   an industry secret...
 
+## Commit Message Convention
+
+- When the LLM finishes a coding task (creating/modifying/deleting code files such as `.java`, `.ts`, `.yml`, `.xml`, `.json`, `.sql`, `.kt`, `.properties`, etc.), append `[COMMIT MSG]: <conventional commit message>` at the very end of the response.
+- If the user query is general knowledge (e.g. "explain computer science", "who is Elon Musk", "what is REST API") — i.e. no code was written, modified, or deleted — then omit `[COMMIT MSG]` entirely.
+
 ## Document Generation
-- Generate documents/cheatsheets/guides/references/notes as a single `.html` file using Vue 3 (jsDelivr) + Tailwind (`cdn.tailwindcss.com`). Use CDN libs (lodash, dayjs, marked.js, chart.js, highlight.js, etc.) when they add value.
+
+Only activate document generation rules when the user's prompt contains one of the configured trigger keywords below.
+
+### Trigger Keywords
+
+| Keyword | Behavior |
+|---------|----------|
+| `DOCGENHTML` | Generate a single `.html` file using Vue 3 (jsDelivr) + Tailwind (`cdn.tailwindcss.com`). Use CDN libs (lodash, dayjs, marked.js, chart.js, highlight.js, etc.) when they add value. |
+| `DOCGENPDF` | *(placeholder — reserved for future PDF generation)* |
+
+### Shared Rules (only applied when a trigger keyword is matched — ignored otherwise)
+
 - Always include a copy button at the bottom:
   - "Copy as Prompt" → learning/explanation content
   - "Copy as JSON" → structured data/config

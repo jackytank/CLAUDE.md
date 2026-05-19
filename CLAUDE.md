@@ -1,4 +1,4 @@
-## Conversation Preferences
+## General Conversation Preferences (Apply for when I ask academic or general purpose questions or in general)
 - Correct my grammar at the top of every response: `[CORRECTED GRAMMAR]: <corrected>` or `[GRAMMAR OK]`
 - When I said I want to see code examples, I mean real-world production code examples, not some textbook
   code like simple class Box, class Rectangle, unless I explicitly tell you I want to see simple examples.
@@ -8,41 +8,16 @@
   limited to) a tip, a small note, a deep insight, an expert opinion, a dark side of the industry,
   an industry secret...
 
-## Commit Message Convention
-
-- When the LLM finishes a coding task (creating/modifying/deleting code files such as `.java`, `.ts`, `.yml`, `.xml`, `.json`, `.sql`, `.kt`, `.properties`, etc.), append `[COMMIT MSG]: <conventional commit message>` at the very end of the response.
-- If the user query is general knowledge (e.g. "explain computer science", "who is Elon Musk", "what is REST API") — i.e. no code was written, modified, or deleted — then omit `[COMMIT MSG]` entirely.
-
-## Document Generation
-
-Only activate document generation rules when the user's prompt contains one of the configured trigger keywords below.
-
-### Trigger Keywords
-
-| Keyword | Behavior |
-|---------|----------|
-| `DOCGENHTML` | Generate a single `.html` file using Vue 3 (jsDelivr) + Tailwind (`cdn.tailwindcss.com`). Use CDN libs (lodash, dayjs, marked.js, chart.js, highlight.js, etc.) when they add value. |
-| `DOCGENPDF` | *(placeholder — reserved for future PDF generation)* |
-
-### Shared Rules (only applied when a trigger keyword is matched — ignored otherwise)
-
-- Always include a copy button at the bottom:
-  - "Copy as Prompt" → learning/explanation content
-  - "Copy as JSON" → structured data/config
-  - "Copy as YAML" → config/infrastructure content
-  + Copies the page's main text content to clipboard using 3-layer defense:
-  + L1: `navigator.clipboard.writeText()` with `.catch()` (HTTPS/non-sandboxed)
-  + L2: `document.execCommand('copy')` via temp off-screen `<textarea>` (sandboxed iframes, Claude viewer, CodePen)
-  + L3: overlay modal with pre-selected text for manual `Ctrl+A → Ctrl+C`
-  + Never use `navigator.clipboard` alone — silently fails in iframes.
-
-## Coding Style
-- I am using Spring Boot 4+ and Java 25+
-- I prefer Spring build tool defaulting to using Gradle Kotlin DSL unless I told you to use Maven (pom.xml)
+## Coding Preferences (Apply when you involve doing CRUD to code)
+- Specifically for new project I prefer using Spring Boot 4+ and Java 25+ and for Spring build tool defaulting to using Gradle Kotlin DSL unless I told you to use Maven (pom.xml)
 - I prefer JPA entities that somewhat solved the N+1 problem
 - I prefer using @Lombok whenever possible, but be aware of issues like the above N+1 problem or
   .equals and .hashCode contract issues
 - I prefer constructor injection using Lombok's @RequiredArgsConstructor
 - If SQL db for JPA @Query query, I prefer a transferable query like JPQL as much as possible, only in
-  cases that I should use nativeQuery, please suggest to me when that case arises
-- If NoSQL db prefers both explicit @Query and derived query methods
+  cases that I should use nativeQuery, please suggest/ask me me when that case arises
+- When you implement specifically a coding task or a software spec and while you do, keep a running implementation-notes.html file (or markdown) with decisions you had to make weren't in the spec, things you had to change, tradeoffs you had to make or anything else I should know.
+- If NoSQL db (for example mongodb) prefers both explicit @Query and derived query methods
+- When you finish specifically a coding task excluding general querying/asking that don't involve you CRUD code then add at the end of your response: `[COMMIT MSG]: <your generated conventional commit message>`
+- When I ask you to generate/enhance/update utility scripts (maybe .py, .sh) then at the top of the script I want to have readme that document the how-to, example commands,... but small and concise that go straight to the point so in the future we can update/read it quick.
+I prefer config-driven development like below the readme section we will have config section maybe a single variable named `CONFIG` if .py or .js if .sh then multiple variables prefixed with `CONFIG_`. I prefer the utility script to be easy to maintain meaning you and I can update/enhance it later without restructure/refactor it too much. I prefer the script when doing some sensitive operations like override/update/delete file I want it to ask/confirm user

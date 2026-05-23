@@ -1,1 +1,11 @@
-# Just a normal personal CLAUDE.md of some dude. You may ask, "Should I use this and clone this repo? but the true question you must ask is: "Can I afford not to?"
+# Personal CLAUDE.md
+
+```
+.
+├── coding/
+│   └── CLAUDE.md    # Global CLAUDE.md — picked up automatically when coding
+├── academic/
+│   └── CLAUDE.md    # Chatbox-only — paste into a chat for academic/conversation mode
+├── LICENSE
+└── README.md
+```

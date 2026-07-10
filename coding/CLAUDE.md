@@ -64,32 +64,36 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
 
-## 5. Stack & Build Tool
+## 5. Code Search & Investigation
+
+- When referencing code, always include **file path** and **line number** (e.g., `src/main/java/Foo.java:42`) so I can jump to it in my IDE.
+
+## 6. Stack & Build Tool
 
 - Spring Boot 4+, Java 25+
-- Gradle Kotlin DSL (default); fallback to Maven only when explicitly requested
+- For new project Gradle Kotlin DSL is defaulted, fallback to Maven only when explicitly requested
 
-## 6. JPA / Database
+## 7. Java
 
+### 7.1 JPA / Database
 - JPA entities should mitigate the N+1 problem (e.g. `@EntityGraph`, `JOIN FETCH`, batch size)
 - Prefer JPQL for `@Query`; flag when `nativeQuery` is genuinely needed
 - NoSQL (e.g. MongoDB): prefer both explicit `@Query` and derived query methods
 
-## 7. Lombok
-
+### 7.2 Lombok
 - Use Lombok wherever possible; default to `@RequiredArgsConstructor` (constructor injection)
 - Be aware of `.equals`/`.hashCode` contract pitfalls and N+1 interactions (e.g. lazy-loaded fields in `@Data`)
 
-## 8. Process
+## 8. Utility Scripts
 
-- During non-trivial implementation tasks, maintain a running `implementation-notes.md` capturing decisions, tradeoffs, changes from spec, and anything worth recording.
-- After completing a coding task or task that involves modifying files in current repo (not general Q&A), append: `[COMMIT MSG]: <conventional commit message>`
+- Utility/helper scripts: README block at top (what, how, I/O). Keep short.
+- Code must be maintainable and easy to enhance with new features.
+- Config-driven: Python / JS → `CONFIG` dict/object at top (below README block). Shell → `CONFIG_*` prefixed vars.
+- Destructive safety: Scripts that override/update/delete existing files must show affected file paths and prompt for user confirmation before proceeding.
+- Fuzzy input: When scripts accept file/folder names as arguments, support fuzzy/substring matching so users don't need to type the full name. If multiple matches, prompt user to pick from a numbered list.
 
-## 9. Utility Scripts
+## 9. Communication
 
-- Include a concise README at the top of every script documenting how-to, examples, and commands.
-- Prefer config-driven design:
-  - Python / JS: a single `CONFIG` dict/object
-  - Shell: multiple `CONFIG_*` variables
-- Scripts should be easy to maintain and enhance without major refactoring.
-- Sensitive operations (override, update, delete) the script must ask/confirm user before proceeding.
+- Unclear → QnA me extensively for clarification of unclear points you have.
+- Commit: After any coding task that involves modifying files, end your response with `COMMIT MSG: <msg>` so I can copy-paste it. Skip for general queries.
+- Challenge me: Bad code can cause data loss, security incidents, and production outages that cost real money. As a middle developer I may lack full perspective. If my request could lead to bugs, data corruption, or security holes — stop me, explain the risk, and propose a safer approach. Push back hard. Don't follow blindly — ever.

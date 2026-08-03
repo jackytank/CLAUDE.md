@@ -3,12 +3,14 @@
 ```
 .
 ├── coding/
-│   └── CLAUDE.md    # Global CLAUDE.md — picked up automatically when coding
+│   └── .claude/
+│       └── CLAUDE.md  # Global coding guidelines — picked up automatically when coding
 ├── academic/
-│   └── CLAUDE.md    # Chatbox-only — paste into a chat for academic/conversation mode
+│   └── .claude/
+│       └── CLAUDE.md  # Chatbox-only — paste into a chat for academic/conversation mode
 ├── LICENSE
 ├── README.md
-└── sync-claude.sh   # Copies a subfolder's CLAUDE.md to ~/.claude/CLAUDE.md
+└── sync-claude.sh     # Copies a subfolder's .claude/CLAUDE.md to ~/.claude/CLAUDE.md
 ```
 
 ## Sync to ~/.claude/CLAUDE.md

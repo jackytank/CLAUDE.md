@@ -1,7 +1,7 @@
 # CLAUDE.md Sync Script
-# Syncs any root subfolder's CLAUDE.md to ~/.claude/CLAUDE.md
+# Syncs any root subfolder's .claude/CLAUDE.md to ~/.claude/CLAUDE.md
 # Usage: ./sync-claude.sh [--dry-run] [folder-name]
-#   - Lists available folders containing CLAUDE.md, defaults to coding/ if present
+#   - Lists available folders containing .claude/CLAUDE.md, defaults to coding/ if present
 #   - With an arg, picks that folder using fuzzy/substring matching
 #   - Prompts for override if ~/.claude/CLAUDE.md already exists
 #   - With --dry-run, prints what would happen without copying or prompting
@@ -25,15 +25,15 @@ for arg in "$@"; do
 done
 
 folders=()
-for f in "$CONFIG_SRC_DIR"/*/CLAUDE.md; do
+for f in "$CONFIG_SRC_DIR"/*/.claude/CLAUDE.md; do
   [ -f "$f" ] || continue
-  name=$(basename "$(dirname "$f")")
+  name=$(basename "$(dirname "$(dirname "$f")")")
   folders+=("$name")
 done
 
 if [ ${#folders[@]} -eq 0 ]; then
   echo "Error: No CLAUDE.md found in any subfolder." >&2
-  echo "Checked: $CONFIG_SRC_DIR/*/CLAUDE.md" >&2
+  echo "Checked: $CONFIG_SRC_DIR/*/.claude/CLAUDE.md" >&2
   exit 1
 fi
 
@@ -91,10 +91,10 @@ else
   choice="${matches[0]}"
 fi
 
-src_file="$CONFIG_SRC_DIR/$choice/CLAUDE.md"
+src_file="$CONFIG_SRC_DIR/$choice/.claude/CLAUDE.md"
 
 if [ "$dry_run" -eq 1 ]; then
-  echo "[dry-run] Would copy $choice/CLAUDE.md -> $CONFIG_DEST_FILE"
+  echo "[dry-run] Would copy $choice/.claude/CLAUDE.md -> $CONFIG_DEST_FILE"
   if [ -f "$CONFIG_DEST_FILE" ]; then
     echo "[dry-run] Existing file would be overwritten: $CONFIG_DEST_FILE"
   fi
@@ -121,4 +121,4 @@ if [ -f "$CONFIG_DEST_FILE" ]; then
 fi
 
 cp "$src_file" "$CONFIG_DEST_FILE"
-echo "Done. Copied $choice/CLAUDE.md -> $CONFIG_DEST_FILE"
+echo "Done. Copied $choice/.claude/CLAUDE.md -> $CONFIG_DEST_FILE"

@@ -1,7 +1,7 @@
-## Academic & General Conversation Preferences
+# Academic & General Conversation Preferences
 
 ### Grammar
-- Correct my grammar at the top of every response: `[CORRECTED GRAMMAR]: <corrected>` or `[GRAMMAR OK]`
+- Correct my grammar only when my prompt contains the keyword `gc!` (case-insensitive). When triggered, start your response with `[CORRECTED GRAMMAR]: <corrected>` or `[GRAMMAR OK]`. Otherwise skip grammar corrections entirely.
 
 ### Feedback
 - I welcome being corrected. I think being wrong is the best way to learn.
